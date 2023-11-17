@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwrx1t5qq1t40"]
+
+[ext_resource type="PackedScene" uid="uid://c72itndpbin8u" path="res://Guns/ShortGun.tscn" id="1_4bfwg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pc58k"]
+resource_name = "FPSTexture"
+viewport_path = NodePath("SubViewport")
+
+[node name="FPSView" type="Node"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+fov = 60.0
+far = 1.0
+
+[node name="Hands" type="Node3D" parent="SubViewport/Camera3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.259023, -0.0830167, -0.454703)
+
+[node name="ShortGun" parent="SubViewport/Camera3D/Hands" instance=ExtResource("1_4bfwg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0332184, -0.0251926, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(577, 325)
+texture = SubResource("ViewportTexture_pc58k")

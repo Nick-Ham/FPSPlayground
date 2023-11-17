@@ -1,0 +1,142 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6hiw5u4sabnq"]
+
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateDefault.gd" id="1_gb4yq"]
+[ext_resource type="PackedScene" uid="uid://bodc075rsmy1u" path="res://Assets/Character/CubeMan.gltf" id="1_ptrg4"]
+[ext_resource type="Script" path="res://Character/CharacterState/Character.gd" id="1_ro73e"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterController.gd" id="3_ks1cs"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateInAir.gd" id="4_vc24y"]
+[ext_resource type="Script" path="res://Character/HeadTilt.gd" id="5_iw30x"]
+[ext_resource type="Script" path="res://Character/PhysicsInterpolator.gd" id="5_k2pqh"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateSlide.gd" id="5_tg1qw"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateSprint.gd" id="6_0ushf"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterNeck.gd" id="7_tjf2q"]
+[ext_resource type="PackedScene" uid="uid://7vopme4epo8g" path="res://Character/DebugHUD.tscn" id="9_7ixrn"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterCamera.gd" id="10_fil37"]
+[ext_resource type="Script" path="res://Components/PeriodicShifter.gd" id="12_veppt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgkbj"]
+radius = 0.25
+height = 1.1
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("StateDefault", "Controller")]
+script = ExtResource("1_ro73e")
+StateDefault = NodePath("States/CharacterStateDefault")
+Controller = NodePath("PlayerController")
+
+[node name="CubeMan" parent="." instance=ExtResource("1_ptrg4")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CapsuleShape3D_xgkbj")
+
+[node name="States" type="Node" parent="."]
+
+[node name="CharacterStateDefault" type="Node" parent="States" node_paths=PackedStringArray("HeadBob", "HeadTilt", "inAirState", "slideState", "sprintState", "character")]
+script = ExtResource("1_gb4yq")
+HeadBob = NodePath("HeadBobDefault")
+HeadTilt = NodePath("HeadTiltDefault")
+inAirState = NodePath("../CharacterStateInAir")
+slideState = NodePath("../CharacterStateSlide")
+sprintState = NodePath("../CharacterStateSprint")
+character = NodePath("../..")
+
+[node name="HeadBobDefault" type="Node" parent="States/CharacterStateDefault" node_paths=PackedStringArray("Target")]
+script = ExtResource("12_veppt")
+Target = NodePath("../../../Head")
+moveX = true
+amplitudeX = 0.05
+frequencyX = 6.0
+offsetX = 4.712
+moveY = true
+amplitudeY = 0.05
+frequencyY = 12.0
+
+[node name="HeadTiltDefault" type="Node" parent="States/CharacterStateDefault" node_paths=PackedStringArray("Target")]
+script = ExtResource("5_iw30x")
+Target = NodePath("../../../Head")
+
+[node name="CharacterStateInAir" type="Node" parent="States" node_paths=PackedStringArray("HeadTilt", "defaultState", "slideState", "character")]
+script = ExtResource("4_vc24y")
+HeadTilt = NodePath("HeadTiltInAir")
+defaultState = NodePath("../CharacterStateDefault")
+slideState = NodePath("../CharacterStateSlide")
+acceleration = 1800.0
+character = NodePath("../..")
+
+[node name="HeadTiltInAir" type="Node" parent="States/CharacterStateInAir" node_paths=PackedStringArray("Target")]
+script = ExtResource("5_iw30x")
+Target = NodePath("../../../Head")
+
+[node name="CharacterStateSlide" type="Node" parent="States" node_paths=PackedStringArray("Neck", "RayCast", "defaultState", "inAirState", "character")]
+script = ExtResource("5_tg1qw")
+Neck = NodePath("../../Head/CharacterNeck")
+RayCast = NodePath("../../SlideRayCast3D")
+defaultState = NodePath("../CharacterStateDefault")
+inAirState = NodePath("../CharacterStateInAir")
+slideTurnWeight = 2.5
+slideStopDuration = 0.1
+slideStopSpeed = 2.5
+acceleration = 0.0
+maxSpeed = 5.0
+maxSpeedEnforcement = 2.0
+friction = 150.0
+character = NodePath("../..")
+
+[node name="CharacterStateSprint" type="Node" parent="States" node_paths=PackedStringArray("Camera", "HeadBob", "HeadTilt", "defaultState", "inAirState", "slideState", "character")]
+script = ExtResource("6_0ushf")
+Camera = NodePath("../../PhysicsInterpolator/Camera3D")
+HeadBob = NodePath("HeadBobSprint")
+HeadTilt = NodePath("HeadTiltSprint")
+defaultState = NodePath("../CharacterStateDefault")
+inAirState = NodePath("../CharacterStateInAir")
+slideState = NodePath("../CharacterStateSlide")
+sprintFovMult = 1.15
+acceleration = 2800.0
+maxSpeed = 3.0
+character = NodePath("../..")
+
+[node name="HeadBobSprint" type="Node" parent="States/CharacterStateSprint" node_paths=PackedStringArray("Target")]
+script = ExtResource("12_veppt")
+Target = NodePath("../../../Head")
+moveX = true
+amplitudeX = 0.05
+frequencyX = 9.0
+offsetX = 4.712
+moveY = true
+amplitudeY = 0.05
+frequencyY = 18.0
+
+[node name="HeadTiltSprint" type="Node" parent="States/CharacterStateSprint" node_paths=PackedStringArray("Target")]
+script = ExtResource("5_iw30x")
+Target = NodePath("../../../Head")
+maxAngle = 1.2
+rotationSpeed = 3.0
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("Character", "Neck")]
+script = ExtResource("3_ks1cs")
+Character = NodePath("..")
+Neck = NodePath("../Head/CharacterNeck")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="CharacterNeck" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969877, 0)
+script = ExtResource("7_tjf2q")
+
+[node name="CameraTarget" type="Node3D" parent="Head/CharacterNeck"]
+
+[node name="PhysicsInterpolator" type="Node3D" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("5_k2pqh")
+Target = NodePath("../Head/CharacterNeck/CameraTarget")
+
+[node name="Camera3D" type="Camera3D" parent="PhysicsInterpolator"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+current = true
+fov = 90.0
+script = ExtResource("10_fil37")
+
+[node name="DebugHUD" parent="." instance=ExtResource("9_7ixrn")]
+
+[node name="SlideRayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.05, 0)

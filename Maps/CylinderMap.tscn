@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=3 uid="uid://bna3j3tnduq68"]
+
+[ext_resource type="Script" path="res://Maps/World.gd" id="1_dppsv"]
+[ext_resource type="PackedScene" uid="uid://c4bjadlnonicb" path="res://Temp/OldCharacter/PlayerCharacter_OLD.tscn" id="2_ka7v0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wu4ox"]
+sky_top_color = Color(0.411765, 0.470588, 0.360784, 1)
+sky_horizon_color = Color(0.605882, 0.646078, 0.629412, 1)
+ground_bottom_color = Color(0.0117647, 0.113725, 0.156863, 1)
+ground_horizon_color = Color(0.605882, 0.646078, 0.629412, 1)
+
+[sub_resource type="Sky" id="Sky_moflb"]
+sky_material = SubResource("ProceduralSkyMaterial_wu4ox")
+
+[sub_resource type="Environment" id="Environment_1lqkt"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_moflb")
+ambient_light_source = 3
+ambient_light_color = Color(0.160784, 1, 0.972549, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpmmo"]
+albedo_color = Color(0.188235, 0.309804, 0.168627, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k3cof"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_470u2"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lcdsp"]
+material = SubResource("StandardMaterial3D_470u2")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mhrkd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wlyj"]
+albedo_color = Color(0.686275, 0.619608, 0.709804, 1)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_dppsv")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.443558, -0.230774, 0, -0.461547, 0.887116, -0.5, 0.768265, 0.399711, 0, 0, 0)
+light_indirect_energy = 5.417
+shadow_enabled = true
+shadow_opacity = 0.95
+shadow_blur = 0.8
+
+[node name="Sun2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.966729, 0.236889, -0.0965343, 0.010432, 0.413573, 0.910411, 0.25559, 0.879114, -0.402284, 0, 0, 0)
+light_energy = 0.2
+light_indirect_energy = 5.417
+shadow_opacity = 0.95
+shadow_blur = 0.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1lqkt")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(128, 1, 128)
+material = SubResource("StandardMaterial3D_fpmmo")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_ka7v0")]
+transform = Transform3D(0.124589, 0, 0.992208, 0, 1, 0, -0.992208, 0, 0.124589, 12.2696, 1.0096, 11)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.393406, 1, -1.99837)
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(0.812422, -0.553603, -0.183013, 0.5, 0.5, 0.707107, -0.29995, -0.665976, 0.683013, -3, 0, -19)
+use_collision = true
+collision_mask = 0
+radius = 1.0
+height = 8.0
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(-0.486081, 0.129945, -0.864199, 0.123173, 0.989199, 0.0794594, 0.86519, -0.0678227, -0.496836, -6, -1, -16)
+use_collision = true
+collision_mask = 0
+radius = 3.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -22)
+use_collision = true
+collision_mask = 0
+radius = 4.0
+height = 6.0
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -19)
+use_collision = true
+collision_mask = 0
+radius = 3.0
+height = 8.0
+
+[node name="CSGCylinder3D11" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0646, 1, 4.3366)
+use_collision = true
+collision_mask = 0
+radius = 6.36095
+height = 6.81676
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.42571, 1, -7.01964)
+use_collision = true
+collision_mask = 0
+radius = 1.71319
+height = 8.07993
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(0.160577, -0.878982, 0.449005, 0.882, 0.33198, 0.334463, -0.443048, 0.342315, 0.82857, -0.655993, 4.34838, -7.44676)
+use_collision = true
+collision_mask = 0
+radius = 1.16676
+height = 12.1163
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(0.317068, -0.871902, 0.373168, 0.94, 0.341172, -0.0015408, -0.125971, 0.351265, 0.927762, 0.36173, 4.61717, -7.90443)
+visible = false
+use_collision = true
+collision_mask = 0
+size = Vector3(1, 14, 1)
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="Node3D"]
+transform = Transform3D(0.80836, -0.134983, -0.573004, 0.164703, 0.986343, 0, 0.565179, -0.0943757, 0.819552, 6.96022, 0.64572, -9.42114)
+use_collision = true
+collision_mask = 0
+radius = 6.0
+height = 6.60222
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(0.268845, -0.554496, -0.787562, 0.856597, 0.51152, -0.0677335, 0.440413, -0.656414, 0.6125, -2.53333, 0.12175, -18.501)
+visible = false
+use_collision = true
+collision_mask = 0
+size = Vector3(1, 9, 1)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.74617, -11)
+physics_material_override = SubResource("PhysicsMaterial_k3cof")
+angular_damp_mode = 1
+angular_damp = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_lcdsp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/RigidBody3D"]
+shape = SubResource("SphereShape3D_mhrkd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10026, 3.25508, 17.775)
+use_collision = true
+size = Vector3(30, 10, 1)
+material = SubResource("StandardMaterial3D_4wlyj")

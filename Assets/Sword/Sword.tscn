@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://diodmwlaunhml"]
+
+[ext_resource type="PackedScene" uid="uid://bsvog48nmnddv" path="res://Assets/Sword/Sword.gltf" id="1_j1gef"]
+
+[node name="Sword" type="Node3D"]
+
+[node name="Sword" parent="." instance=ExtResource("1_j1gef")]

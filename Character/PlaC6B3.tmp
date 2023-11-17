@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0mal85ipo450"]
+
+[ext_resource type="Script" path="res://Character/PlayerCharacter.gd" id="1_lv0hh"]
+[ext_resource type="Script" path="res://Components/PositionalShifter.gd" id="2_rydvg"]
+[ext_resource type="PackedScene" uid="uid://7vopme4epo8g" path="res://Character/DebugHUD.tscn" id="2_sw1sr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q0i6r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5laf"]
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("Head", "PlayerCamera")]
+collision_layer = 2
+script = ExtResource("1_lv0hh")
+Head = NodePath("PositionalShifter/Head")
+PlayerCamera = NodePath("PositionalShifter/Head/PlayerCamera")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_q0i6r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_a5laf")
+
+[node name="DebugHUD" parent="." instance=ExtResource("2_sw1sr")]
+
+[node name="PositionalShifter" type="Node3D" parent="."]
+script = ExtResource("2_rydvg")
+
+[node name="Head" type="Node3D" parent="PositionalShifter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="PositionalShifter/Head"]

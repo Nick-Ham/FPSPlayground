@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs0oglft3klka"]
+
+[ext_resource type="PackedScene" uid="uid://dxcd0mgalloc" path="res://Assets/ShipWalker/ShipWalker2.gltf" id="1_lh4x2"]
+
+[node name="ShipWalker" type="StaticBody3D"]
+
+[node name="ShipWalker2" parent="." instance=ExtResource("1_lh4x2")]
+
+[editable path="ShipWalker2"]

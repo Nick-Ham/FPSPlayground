@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4bjadlnonicb"]
+
+[ext_resource type="Script" path="res://Temp/OldCharacter/PlayerCharacter_OLD.gd" id="1_gr5f1"]
+[ext_resource type="PackedScene" uid="uid://7vopme4epo8g" path="res://Character/DebugHUD.tscn" id="2_sw1sr"]
+[ext_resource type="Script" path="res://Temp/OldCharacter/Hands.gd" id="3_vexew"]
+[ext_resource type="Script" path="res://Components/HeadTilter.gd" id="4_e6esk"]
+[ext_resource type="Script" path="res://Components/PeriodicShifter.gd" id="4_iachi"]
+[ext_resource type="Script" path="res://Components/PhysicsInterpolator.gd" id="7_vlfbi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q0i6r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5laf"]
+radius = 0.25
+height = 1.0
+
+[node name="PlayerCharacterTest" type="CharacterBody3D" node_paths=PackedStringArray("Head", "Neck", "HeadBob", "HeadTilt", "Camera")]
+collision_layer = 2
+script = ExtResource("1_gr5f1")
+sprintSpeed = 2.8
+sprintFovEnabled = true
+Head = NodePath("Root/Head")
+Neck = NodePath("Root/Head/Neck")
+HeadBob = NodePath("PeriodicShifter")
+HeadTilt = NodePath("Root/HeadTilt")
+Camera = NodePath("PhysicsInterpolator/Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_q0i6r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_a5laf")
+
+[node name="DebugHUD" parent="." instance=ExtResource("2_sw1sr")]
+
+[node name="Root" type="Node3D" parent="."]
+
+[node name="Head" type="Node3D" parent="Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Neck" type="Node3D" parent="Root/Head"]
+
+[node name="Hands" type="Node3D" parent="Root/Head/Neck"]
+transform = Transform3D(0.99943, 0, 0.0337483, 0, 1, 0, -0.0337483, 0, 0.99943, 0.343594, -0.248615, -0.594579)
+script = ExtResource("3_vexew")
+
+[node name="HeadTilt" type="Node" parent="Root" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_e6esk")
+Target = NodePath("..")
+
+[node name="PeriodicShifter" type="Node" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("4_iachi")
+Target = NodePath("../Root")
+moveX = true
+amplitudeX = 0.05
+frequencyX = 6.0
+moveY = true
+amplitudeY = 0.05
+frequencyY = 12.0
+
+[node name="PhysicsInterpolator" type="Node3D" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("7_vlfbi")
+Target = NodePath("../Root/Head/Neck")
+
+[node name="Camera3D" type="Camera3D" parent="PhysicsInterpolator"]
+current = true
+fov = 80.0

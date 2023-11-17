@@ -1,0 +1,1230 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpp8tbjvuppgt"]
+
+[ext_resource type="Script" path="res://Maps/World.gd" id="1_q7inn"]
+[ext_resource type="PackedScene" uid="uid://txkdakrtph7n" path="res://Assets/Building/Building.tscn" id="4_aguev"]
+[ext_resource type="PackedScene" uid="uid://c6hiw5u4sabnq" path="res://Character/PlayerCharacter.tscn" id="5_r5mt0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_15k7w"]
+sky_top_color = Color(0.564706, 0.713726, 0.647059, 1)
+sky_horizon_color = Color(1, 0.478431, 0.313726, 1)
+
+[sub_resource type="Sky" id="Sky_wkwcc"]
+sky_material = SubResource("ProceduralSkyMaterial_15k7w")
+
+[sub_resource type="Environment" id="Environment_pyshm"]
+background_mode = 2
+sky = SubResource("Sky_wkwcc")
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_q7inn")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.443558, -0.230774, 0, -0.461547, 0.887116, -0.5, 0.768265, 0.399711, 0, 0, 0)
+light_indirect_energy = 5.417
+shadow_enabled = true
+shadow_opacity = 0.95
+shadow_blur = 0.8
+
+[node name="Sun2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.966729, 0.236889, -0.0965343, 0.010432, 0.413573, 0.910411, 0.25559, 0.879114, -0.402284, 0, 0, 0)
+light_energy = 0.2
+light_indirect_energy = 5.417
+shadow_opacity = 0.95
+shadow_blur = 0.8
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="BuildingRow" type="Node3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6, 6.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow2" type="Node3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 8.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow2/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow2/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow2/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow2/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow2/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow2/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow2/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow2/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow2/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow2/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow2/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow2/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow2/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow2/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow2/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow2/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow3" type="Node3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, 8.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow3/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow3/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow3/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow3/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow3/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow3/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow3/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow3/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow3/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow3/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow3/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow3/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow3/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow3/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow3/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow3/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow10" type="Node3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 15, 8.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow10"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow10/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow10/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow10/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow10/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow10"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow10/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow10/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow10/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow10/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow10"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow10/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow10/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow10/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow10/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow10"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow10/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow10/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow10/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow10/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow4" type="Node3D" parent="Objects"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -16, -2, 8.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow4/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow4/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow4/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow4/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow4/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow4/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow4/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow4/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow4/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow4/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow4/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow4/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow4/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow4/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow4/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow4/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow11" type="Node3D" parent="Objects"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -16, 10, 8.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow11/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow11/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow11/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow11/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow11/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow11/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow11/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow11/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow11/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow11/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow11/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow11/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow11/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow11/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow11/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow11/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow5" type="Node3D" parent="Objects"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -21, -2, 7.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow5"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow5/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow5/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow5/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow5/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow5"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow5/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow5/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow5/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow5/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow5"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow5/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow5/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow5/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow5/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow5"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow5/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow5/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow5/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow5/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow12" type="Node3D" parent="Objects"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -21, 10, 7.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow12"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow12/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow12/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow12/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow12/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow12"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow12/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow12/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow12/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow12/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow12"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow12/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow12/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow12/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow12/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow12"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow12/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow12/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow12/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow12/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow6" type="Node3D" parent="Objects"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -24, -6, 5.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow6"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow6/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow6/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow6/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow6/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow6"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow6/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow6/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow6/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow6/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow6"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow6/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow6/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow6/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow6/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow6"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow6/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow6/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow6/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow6/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow13" type="Node3D" parent="Objects"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -24, 6, 5.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow13"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow13/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow13/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow13/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow13/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow13"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow13/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow13/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow13/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow13/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow13"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow13/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow13/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow13/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow13/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow13"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow13/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow13/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow13/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow13/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow7" type="Node3D" parent="Objects"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -27, -10, 2.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow7"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow7/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow7/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow7/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow7/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow7"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow7/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow7/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow7/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow7/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow7"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow7/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow7/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow7/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow7/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow7"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow7/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow7/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow7/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow7/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow14" type="Node3D" parent="Objects"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -27, 2, 2.18542)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow14"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow14/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow14/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow14/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow14/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow14"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow14/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow14/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow14/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow14/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow14"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow14/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow14/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow14/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow14/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow14"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow14/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow14/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow14/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow14/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow8" type="Node3D" parent="Objects"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -29, -14, -1.81458)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow8"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow8/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow8/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow8/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow8/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow8"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow8/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow8/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow8/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow8/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow8"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow8/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow8/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow8/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow8/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow8"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow8/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow8/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow8/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow8/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow9" type="Node3D" parent="Objects"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, -29, -21, -4.81458)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow9"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow9/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow9/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow9/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow9/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow9"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow9/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow9/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow9/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow9/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow9"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow9/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow9/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow9/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow9/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow9"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow9/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow9/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow9/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow9/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow16" type="Node3D" parent="Objects"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, -29, -9, -4.81458)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow16"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow16/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow16/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow16/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow16/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow16"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow16/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow16/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow16/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow16/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow16"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow16/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow16/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow16/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow16/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow16"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow16/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow16/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow16/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow16/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow17" type="Node3D" parent="Objects"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -28.6718, -23, -9.90303)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow17"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow17/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow17/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow17/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow17/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow17"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow17/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow17/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow17/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow17/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow17"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow17/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow17/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow17/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow17/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow17"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow17/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow17/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow17/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow17/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow18" type="Node3D" parent="Objects"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -28.6718, -11, -9.90303)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow18"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow18/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow18/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow18/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow18/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow18"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow18/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow18/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow18/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow18/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow18"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow18/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow18/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow18/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow18/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow18"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow18/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow18/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow18/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow18/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow19" type="Node3D" parent="Objects"]
+transform = Transform3D(0.476727, 0.842752, 0.25, -0.183013, -0.183013, 0.965926, 0.859789, -0.506236, 0.0669874, -28.6718, -24, -9.90303)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow19"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow19/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow19/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow19/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow19/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow19"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow19/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow19/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow19/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow19/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow19"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow19/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow19/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow19/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow19/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow19"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow19/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow19/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow19/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow19/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow20" type="Node3D" parent="Objects"]
+transform = Transform3D(0.476727, 0.842752, 0.25, -0.183013, -0.183013, 0.965926, 0.859789, -0.506236, 0.0669874, -18.5588, -26.1961, -15.9779)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow20"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow20/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow20/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow20/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow20/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow20"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow20/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow20/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow20/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow20/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow20"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow20/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow20/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow20/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow20/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow20"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow20/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow20/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow20/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow20/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="BuildingRow15" type="Node3D" parent="Objects"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -29, -2, -1.81458)
+
+[node name="Building" type="Node3D" parent="Objects/BuildingRow15"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow15/Building" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow15/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow15/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow15/Building" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building2" type="Node3D" parent="Objects/BuildingRow15"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow15/Building2" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow15/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow15/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow15/Building2" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building3" type="Node3D" parent="Objects/BuildingRow15"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow15/Building3" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow15/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow15/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow15/Building3" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="Building4" type="Node3D" parent="Objects/BuildingRow15"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 0)
+
+[node name="Building" parent="Objects/BuildingRow15/Building4" instance=ExtResource("4_aguev")]
+
+[node name="Building2" parent="Objects/BuildingRow15/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Building3" parent="Objects/BuildingRow15/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Building4" parent="Objects/BuildingRow15/Building4" instance=ExtResource("4_aguev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.181429, 0.983404, 0, -0.983404, 0.181429, 0, 0, 0)
+visible = false
+light_energy = 0.02
+sky_mode = 1
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("5_r5mt0")]
+transform = Transform3D(-0.413724, 0, -0.910402, 0, 1, 0, 0.910402, 0, -0.413724, 4.60766, 9.35693, 2.93692)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pyshm")
