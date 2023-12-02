@@ -4,6 +4,7 @@ class_name CharacterState
 var lastInputDirection : Vector2 = Vector2()
 var lastIsSprinting : bool = false
 var lastIsSliding : bool = false
+var lastIsActivating : bool = false
 
 @export_category("Config")
 @export var acceleration : float = 2200.0
@@ -11,9 +12,11 @@ var lastIsSliding : bool = false
 @export var maxSpeedEnforcement : float = 10.0
 @export var friction : float = 300.0
 @export var jumpVelocity : float = 4.5
+@export var canShoot : bool = true
 
 @export_category("Built-In")
 @export var character : Character
+@export var manager : StateManager
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -43,6 +46,9 @@ func updatePhysics(delta : float) -> void:
 		character.velocity = applyFriction(character.velocity, delta)
 	
 	character.move_and_slide()
+
+func addNewIsActivating(inIsActivating : bool) -> void:
+	lastIsActivating = inIsActivating
 
 func addNewInputDirection(inInputDirection : Vector2) -> void:
 	lastInputDirection = inInputDirection

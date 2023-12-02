@@ -2,13 +2,9 @@ extends CharacterState
 class_name CharacterStateInAir
 
 @export_category("Built-In")
-@export var HeadTilt : HeadTilter
-@export var RayCastLeft : RayCast3D
-@export var RayCastRight : RayCast3D
-@export_group("States")
-@export var defaultState : CharacterStateDefault
-@export var slideState : CharacterStateSlide
-@export var wallSlideState : CharacterStateWallSlide
+@export var headTilt : HeadTilter
+@export var rayCastLeft : RayCast3D
+@export var rayCastRight : RayCast3D
 
 @export_category("InAirConfig")
 @export var wallSlideAngleLimit : float = 13.0
@@ -26,17 +22,17 @@ func updatePhysics(delta):
 	if(trySwitchToDefault()):
 		return
 	
-	HeadTilt.update(delta, lastInputDirection.x)
+	headTilt.update(delta, lastInputDirection.x)
 
 func trySwitchToDefault() -> bool:
 	if character.is_on_floor() and !lastIsSliding:
-		character.switchState(defaultState)
+		manager.switchState(manager.getDefaultState())
 		return true
 	return false
 
 func trySwitchToSlide() -> bool:
 	if character.is_on_floor() and lastIsSliding:
-		character.switchState(slideState)
+		manager.switchState(manager.getSlideState())
 		return true
 	return false
 
@@ -66,7 +62,7 @@ func trySwitchToWallSlide() -> bool:
 		
 		character.velocity += totalDirection * wallSlideBoost
 		
-		character.switchState(wallSlideState)
+		manager.switchState(manager.getWallSlideState())
 	
 	return false
 
@@ -74,10 +70,10 @@ func getRayIfValidWall() -> RayCast3D:
 	if !character.is_on_wall_only():
 		return null
 	
-	if RayCastLeft.is_colliding():
-		return RayCastLeft
+	if rayCastLeft.is_colliding():
+		return rayCastLeft
 	
-	if RayCastRight.is_colliding():
-		return RayCastRight
+	if rayCastRight.is_colliding():
+		return rayCastRight
 	
 	return null

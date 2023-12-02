@@ -2,8 +2,8 @@ extends Node
 class_name CharacterController
 
 @export_category("Built-In")
-@export var Character : Character
-@export var Neck : Node3D
+@export var character : Character
+@export var neck : Node3D
 
 const MOUSE_SENSITIVITY_CONST = .001
 
@@ -32,9 +32,9 @@ func _exit_tree():
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		Character.rotate_y(-event.relative.x * MOUSE_SENSITIVITY_CONST * mouseSensitivity * horizontalSensitivity)
-		Neck.rotate_x(event.relative.y * MOUSE_SENSITIVITY_CONST * mouseSensitivity * verticalSensitivity)
-		Neck.rotation.x = clamp(Neck.rotation.x, -PI/2.0, PI/2.0)
+		character.rotate_y(-event.relative.x * MOUSE_SENSITIVITY_CONST * mouseSensitivity * horizontalSensitivity)
+		neck.rotate_x(event.relative.y * MOUSE_SENSITIVITY_CONST * mouseSensitivity * verticalSensitivity)
+		neck.rotation.x = clamp(neck.rotation.x, -PI/2.0, PI/2.0)
 
 func _process(_delta):
 	var direction = getDirection()
@@ -56,12 +56,12 @@ func _process(_delta):
 	
 	var joystickDirection = Input.get_vector("CameraLeft", "CameraRight", "CameraUp", "CameraDown")
 	if !joystickDirection.is_zero_approx():
-		Character.rotate_y(-joystickDirection.x * joystickSensitivity * horizontalSensitivity)
-		Neck.rotate_x(joystickDirection.y * joystickSensitivity * verticalSensitivity)
-		Neck.rotation.x = clamp(Neck.rotation.x, -PI/2.0, PI/2.0)
+		character.rotate_y(-joystickDirection.x * joystickSensitivity * horizontalSensitivity)
+		neck.rotate_x(joystickDirection.y * joystickSensitivity * verticalSensitivity)
+		neck.rotation.x = clamp(neck.rotation.x, -PI/2.0, PI/2.0)
 	
 	var isActivating = getIsActivating()
-	emit_signal("input_is_activating")
+	emit_signal("input_is_activating", isActivating)
 
 func getIsActivating() -> bool:
 	return Input.is_action_pressed("Click")

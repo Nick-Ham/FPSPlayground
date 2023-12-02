@@ -1,0 +1,82 @@
+[gd_scene load_steps=22 format=3 uid="uid://c6hiw5u4sabnq"]
+
+[ext_resource type="Script" path="res://Character/Character.gd" id="1_quucf"]
+[ext_resource type="PackedScene" uid="uid://bodc075rsmy1u" path="res://Assets/Character/CubeMan.gltf" id="2_wgcur"]
+[ext_resource type="Script" path="res://Character/StateManager.gd" id="3_8lvmm"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateDefault.gd" id="3_uaqpb"]
+[ext_resource type="Script" path="res://Components/PeriodicShifter.gd" id="4_52b7g"]
+[ext_resource type="Script" path="res://Components/HeadTilter.gd" id="5_iyia5"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateInAir.gd" id="6_rd644"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateSlide.gd" id="7_8cxhk"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateSprint.gd" id="8_h88db"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateWallSlide.gd" id="9_3gd60"]
+[ext_resource type="Script" path="res://Character/CharacterController.gd" id="10_bgsp5"]
+[ext_resource type="Script" path="res://Character/CharacterNeck.gd" id="11_lvk64"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateCrawl.gd" id="11_owv1b"]
+[ext_resource type="Script" path="res://Components/PhysicsInterpolator.gd" id="12_lcx1h"]
+[ext_resource type="Script" path="res://Character/CharacterCamera.gd" id="13_s2a8a"]
+[ext_resource type="PackedScene" uid="uid://7vopme4epo8g" path="res://Character/DebugHUD.tscn" id="14_wid2k"]
+[ext_resource type="PackedScene" uid="uid://bwrx1t5qq1t40" path="res://Character/FPSView.tscn" id="15_di8hs"]
+[ext_resource type="Script" path="res://GunController.gd" id="16_pkdiy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgkbj"]
+radius = 0.25
+height = 1.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2vjg"]
+radius = 0.25
+height = 0.75
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cyeio"]
+resource_name = "FPSTexture"
+viewport_path = NodePath("SubViewport")
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("StateDefault", "Controller")]
+script = ExtResource("1_quucf")
+StateDefault = NodePath("StateManager/CharacterStateDefault")
+Controller = NodePath("PlayerController")
+
+[node name="CubeMan" parent="." instance=ExtResource("2_wgcur")]
+visible = false
+
+[node name="DefaultCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CapsuleShape3D_xgkbj")
+
+[node name="CrouchCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("CapsuleShape3D_g2vjg")
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("character", "defaultState", "inAirState", "slideState", "sprintState", "wallSlideState")]
+script = ExtResource("3_8lvmm")
+character = NodePath("..")
+defaultState = NodePath("CharacterStateDefault")
+inAirState = NodePath("CharacterStateInAir")
+slideState = NodePath("CharacterStateSlide")
+sprintState = NodePath("CharacterStateSprint")
+wallSlideState = NodePath("CharacterStateWallSlide")
+
+[node name="CharacterStateDefault" type="Node" parent="StateManager" node_paths=PackedStringArray("headBob", "headTilt", "character", "manager")]
+script = ExtResource("3_uaqpb")
+headBob = NodePath("HeadBobDefault")
+headTilt = NodePath("../../HeadTilter")
+acceleration = null
+maxSpeed = null
+maxSpeedEnforcement = null
+friction = null
+jumpVelocity = null
+character = NodePath("../..")
+manager = NodePath("..")
+
+[node name="HeadBobDefault" type="Node" parent="StateManager/CharacterStateDefault" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_52b7g")
+Target = NodePath("../../../Head")
+moveX = true
+amplitudeX = 0.05
+frequencyX = 6.0
+offsetX = 4.712
+moveY = true
+amplitudeY = 0.05
+frequencyY = 12.0
+
+[node name="CharacterStateInAir" type="Node" parent="StateManager" node_paths=PackedStringArray("headTilt", "rayCastLeft", "rayCastRight", "character", 

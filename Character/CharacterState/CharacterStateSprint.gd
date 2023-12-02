@@ -2,48 +2,45 @@ extends CharacterState
 class_name CharacterStateSprint
 
 @export_category("Built-In")
-@export var Camera : CharacterCamera
-@export var HeadBob : PeriodicShifter
-@export var HeadTilt : HeadTilter
-@export_group("States")
-@export var defaultState : CharacterStateDefault
-@export var inAirState : CharacterStateInAir
-@export var slideState : CharacterStateSlide
+@export var camera : CharacterCamera
+@export var headBob : PeriodicShifter
+@export var headTilt : HeadTilter
 
 @export_category("SprintConfig")
 @export var sprintFovMult : float = 1.2
 @export var sprintMinSpeed : float = 2.0
+@export var headBobTimescale : float = 1.5
 
 func _on_state_enter():
 	super._on_state_enter()
 	
-	Camera.setFovTarget(sprintFovMult)
+	camera.setFovTarget(sprintFovMult)
 
 func update(_delta : float) -> void:
 	if !lastIsSprinting:
 		endSprint()
-		character.switchState(defaultState)
+		manager.switchState(manager.getDefaultState())
 	
 	if character.velocity.length() < sprintMinSpeed:
 		endSprint()
-		character.switchState(defaultState)
+		manager.switchState(manager.getDefaultState())
 
 func updatePhysics(delta):
 	super.updatePhysics(delta)
 	
-	HeadBob.update(delta)
-	HeadTilt.update(delta, lastInputDirection.x)
+	headBob.updateWithTimescale(delta, headBobTimescale)
+	headTilt.update(delta, lastInputDirection.x)
 
 func endSprint():
-	Camera.resetFov()
+	camera.resetFov()
 
 func justJumped():
 	if character.getCoyoteTime() || character.is_on_floor():
 		character.velocity.y += jumpVelocity
 	
 	endSprint()
-	character.switchState(inAirState)
+	manager.switchState(manager.getInAirState())
 
 func justSlid():
 	endSprint()
-	character.switchState(slideState)
+	manager.switchState(manager.getSlideState())

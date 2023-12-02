@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c72itndpbin8u"]
-
-[ext_resource type="PackedScene" uid="uid://blynmqgn5l46e" path="res://Assets/ShortGun/ShortGun.gltf" id="1_giccp"]
-
-[node name="ShortGun" type="Node3D"]
-
-[node name="ShortGun" parent="." instance=ExtResource("1_giccp")]

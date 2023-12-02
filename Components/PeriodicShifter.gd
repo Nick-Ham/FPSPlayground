@@ -22,8 +22,8 @@ var totalTime : float = 0.0
 @export var frequencyZ : float = 1
 @export var offsetZ : float = 0
 
-func update(delta : float):
-	totalTime += delta
+func updateWithTimescale(delta : float, timeScale : float):
+	totalTime += delta * timeScale
 	
 	if moveX:
 		Target.position.x = sin(offsetX + frequencyX * totalTime) * amplitudeX
@@ -33,3 +33,7 @@ func update(delta : float):
 	
 	if moveZ:
 		Target.position.z = sin(offsetZ + frequencyZ * totalTime) * amplitudeZ
+
+func update(delta : float):
+	updateWithTimescale(delta, 1.0)
+	

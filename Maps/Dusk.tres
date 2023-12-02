@@ -1,0 +1,25 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://c2dls1hw3be0m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m3aqo"]
+sky_top_color = Color(0.92549, 0.74902, 0.490196, 1)
+sky_horizon_color = Color(0.505882, 0.368627, 0.584314, 1)
+sky_curve = 0.113679
+ground_horizon_color = Color(0.258824, 0.14902, 0.235294, 1)
+ground_curve = 0.251067
+
+[sub_resource type="Sky" id="Sky_vueji"]
+sky_material = SubResource("ProceduralSkyMaterial_m3aqo")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_vueji")
+fog_density = 0.0
+fog_sky_affect = 0.199
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_emission = Color(0.686275, 0.490196, 0.447059, 1)
+volumetric_fog_anisotropy = -0.19
+volumetric_fog_length = 32.0
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_sky_affect = 0.32
+volumetric_fog_temporal_reprojection_enabled = false

@@ -1,0 +1,53 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bwsbp5jwlb61f"
+path="res://.godot/imported/TreeLOD2Merged.gltf-8168a6b0c0616c357155a764b4b8c9fe.scn"
+
+[deps]
+
+source_file="res://Assets/Tree/TreeLOD2Merged.gltf"
+dest_files=["res://.godot/imported/TreeLOD2Merged.gltf-8168a6b0c0616c357155a764b4b8c9fe.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"material_0": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Tree/material_0.tres"
+}
+},
+"meshes": {
+"blockbench_export_mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Tree/TreeLOD2.res"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

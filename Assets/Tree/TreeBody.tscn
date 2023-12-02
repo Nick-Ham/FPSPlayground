@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc6kgcvd5e1b3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_56xx7"]
+height = 3.11343
+radius = 0.247455
+
+[node name="TreeBody" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0346069, 1.39546, 0.00180054)
+shape = SubResource("CylinderShape3D_56xx7")

@@ -2,12 +2,12 @@ extends CharacterState
 class_name CharacterStateSlide
 
 @export_category("Built-In")
-@export var Neck : CharacterNeck
-@export var RayCast : RayCast3D
-@export var HeadTilt : HeadTilter
-@export_group("States")
-@export var defaultState : CharacterStateDefault
-@export var inAirState : CharacterStateInAir
+@export var neck : CharacterNeck
+@export var rayCast : RayCast3D
+@export var headTilt : HeadTilter
+@export var defaultCapsule : CollisionShape3D
+@export var crouchCapsule : CollisionShape3D
+@export var defaultCharacterArea : Area3D
 
 @export_category("SlideConfig")
 @export var slideTurnWeight : float = 0.9
@@ -27,7 +27,7 @@ func _on_state_enter():
 	
 	var velocityPlanar = Vector2(character.velocity.x, character.velocity.z)
 	if velocityPlanar.length_squared() < 5:
-		stopSlide(defaultState)
+		stopSlide(manager.getDefaultState())
 		return
 	
 	var slideDirection : Vector3
@@ -38,10 +38,16 @@ func _on_state_enter():
 	
 	character.velocity += slideDirection * slideBoost
 	
-	Neck.setHeightTarget(slideHeight)
+	crouchCapsule.disabled = false
+	defaultCapsule.disabled = true
+	
+	neck.setHeightTarget(slideHeight)
 
 func _on_state_exit():
-	Neck.resetHeight()
+	defaultCapsule.disabled = false
+	crouchCapsule.disabled = true
+	
+	neck.resetHeight()
 
 func updatePhysics(delta) -> void:
 	if !lastInputDirection.is_zero_approx() and slideTurnWeight != 0.0:
@@ -53,13 +59,13 @@ func updatePhysics(delta) -> void:
 		character.velocity.y = velocityComponentY
 	
 	if character.velocity.y < -slideMaxFallSpeed:
-		stopSlide(inAirState)
+		stopSlide(manager.getInAirState())
 		return
 	
 	if isSlideReadyToStop() and !slideStopHasStarted:
 		startSlideStop()
 	
-	HeadTilt.update(delta, lastInputDirection.x)
+	headTilt.update(delta, lastInputDirection.x)
 	super.updatePhysics(delta)
 
 func isSlideReadyToStop() -> bool:
@@ -71,29 +77,33 @@ func startSlideStop():
 	slideStopHasStarted = true
 
 func stopSlide(newState : CharacterState) -> void:
-	Neck.resetHeight()
 	slideStopHasStarted = false
-	character.switchState(newState)
+	if defaultCharacterArea.has_overlapping_bodies():
+		manager.switchState(manager.getCrawlState())
+		return
+	
+	neck.resetHeight()
+	manager.switchState(newState)
 	return
 
 func _on_slide_timer_end():
 	if character.currentState == self:
-		stopSlide(defaultState)
+		stopSlide(manager.getDefaultState())
 
 func justJumped() -> void:
 	if character.getCoyoteTime() || character.is_on_floor():
 		character.velocity.y += jumpVelocity
 	
-	stopSlide(inAirState)
+	stopSlide(manager.getInAirState())
 
 func applyGravity(delta : float) -> void:
 	if !character.is_on_floor():
 		character.velocity.y -= gravity * delta
 	
-	if !RayCast.is_colliding():
+	if !rayCast.is_colliding():
 		return
 	
-	var normal : Vector3 = RayCast.get_collision_normal()
+	var normal : Vector3 = rayCast.get_collision_normal()
 	var angleToGround = rad_to_deg(Vector3.UP.angle_to(normal))
 	var direction = Vector2(normal.x, normal.z).normalized()
 	

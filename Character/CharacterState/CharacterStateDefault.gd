@@ -2,32 +2,28 @@ extends CharacterState
 class_name CharacterStateDefault
 
 @export_category("Built-In")
-@export var HeadBob : PeriodicShifter
-@export var HeadTilt : HeadTilter
-@export_group("States")
-@export var inAirState : CharacterStateInAir
-@export var slideState : CharacterStateSlide
-@export var sprintState : CharacterStateSprint
+@export var headBob : PeriodicShifter
+@export var headTilt : HeadTilter
 
 func update(_delta : float) -> void:
-	if lastIsSprinting and character.velocity.length() > sprintState.sprintMinSpeed:
-		character.switchState(sprintState)
+	if lastIsSprinting and character.velocity.length() > manager.getSprintState().sprintMinSpeed:
+		manager.switchState(manager.getSprintState())
 		return
 
 func updatePhysics(delta : float) -> void:
 	super.updatePhysics(delta)
 	
 	if !lastInputDirection.is_zero_approx():
-		HeadBob.update(delta)
+		headBob.update(delta)
 	
-	HeadTilt.update(delta, lastInputDirection.x)
+	headTilt.update(delta, lastInputDirection.x)
 
 func justJumped():
 	if character.getCoyoteTime() || character.is_on_floor():
 		character.velocity.y += jumpVelocity
 	
-	character.switchState(inAirState)
+	manager.switchState(manager.getInAirState())
 
 func justSlid():
-	character.switchState(slideState)
+	manager.switchState(manager.getSlideState())
 

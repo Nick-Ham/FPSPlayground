@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6hiw5u4sabnq"]
+[gd_scene load_steps=20 format=3 uid="uid://c6hiw5u4sabnq"]
 
 [ext_resource type="Script" path="res://Character/Character.gd" id="1_quucf"]
 [ext_resource type="PackedScene" uid="uid://bodc075rsmy1u" path="res://Assets/Character/CubeMan.gltf" id="2_wgcur"]
+[ext_resource type="Script" path="res://Character/StateManager.gd" id="3_8lvmm"]
 [ext_resource type="Script" path="res://Character/CharacterState/CharacterStateDefault.gd" id="3_uaqpb"]
 [ext_resource type="Script" path="res://Components/PeriodicShifter.gd" id="4_52b7g"]
 [ext_resource type="Script" path="res://Components/HeadTilter.gd" id="5_iyia5"]
@@ -11,74 +12,78 @@
 [ext_resource type="Script" path="res://Character/CharacterState/CharacterStateWallSlide.gd" id="9_3gd60"]
 [ext_resource type="Script" path="res://Character/CharacterController.gd" id="10_bgsp5"]
 [ext_resource type="Script" path="res://Character/CharacterNeck.gd" id="11_lvk64"]
+[ext_resource type="Script" path="res://Character/CharacterState/CharacterStateCrawl.gd" id="11_owv1b"]
 [ext_resource type="Script" path="res://Components/PhysicsInterpolator.gd" id="12_lcx1h"]
 [ext_resource type="Script" path="res://Character/CharacterCamera.gd" id="13_s2a8a"]
 [ext_resource type="PackedScene" uid="uid://7vopme4epo8g" path="res://Character/DebugHUD.tscn" id="14_wid2k"]
-[ext_resource type="PackedScene" uid="uid://bwrx1t5qq1t40" path="res://Character/FPSView.tscn" id="15_di8hs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgkbj"]
 radius = 0.25
 height = 1.1
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cyeio"]
-resource_name = "FPSTexture"
-viewport_path = NodePath("FPSView/SubViewport")
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2vjg"]
+radius = 0.25
+height = 0.75
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyvhw"]
+radius = 0.23
+height = 1.05
 
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("StateDefault", "Controller")]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_quucf")
-StateDefault = NodePath("States/CharacterStateDefault")
+StateDefault = NodePath("StateManager/CharacterStateDefault")
 Controller = NodePath("PlayerController")
 
 [node name="CubeMan" parent="." instance=ExtResource("2_wgcur")]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="DefaultCapsule" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 shape = SubResource("CapsuleShape3D_xgkbj")
 
-[node name="States" type="Node" parent="."]
+[node name="CrouchCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("CapsuleShape3D_g2vjg")
 
-[node name="CharacterStateDefault" type="Node" parent="States" node_paths=PackedStringArray("HeadBob", "HeadTilt", "inAirState", "slideState", "sprintState", "character")]
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("character", "defaultState", "inAirState", "slideState", "sprintState", "wallSlideState", "crawlState")]
+script = ExtResource("3_8lvmm")
+character = NodePath("..")
+defaultState = NodePath("CharacterStateDefault")
+inAirState = NodePath("CharacterStateInAir")
+slideState = NodePath("CharacterStateSlide")
+sprintState = NodePath("CharacterStateSprint")
+wallSlideState = NodePath("CharacterStateWallSlide")
+crawlState = NodePath("CharacterStateCrawl")
+
+[node name="CharacterStateDefault" type="Node" parent="StateManager" node_paths=PackedStringArray("headBob", "headTilt", "character", "manager")]
 script = ExtResource("3_uaqpb")
-HeadBob = NodePath("HeadBobDefault")
-HeadTilt = NodePath("../../HeadTilter")
-inAirState = NodePath("../CharacterStateInAir")
-slideState = NodePath("../CharacterStateSlide")
-sprintState = NodePath("../CharacterStateSprint")
+headBob = NodePath("../../Head/HeadBob")
+headTilt = NodePath("../../HeadTilter")
 character = NodePath("../..")
+manager = NodePath("..")
 
-[node name="HeadBobDefault" type="Node" parent="States/CharacterStateDefault" node_paths=PackedStringArray("Target")]
-script = ExtResource("4_52b7g")
-Target = NodePath("../../../Head")
-moveX = true
-amplitudeX = 0.05
-frequencyX = 6.0
-offsetX = 4.712
-moveY = true
-amplitudeY = 0.05
-frequencyY = 12.0
-
-[node name="CharacterStateInAir" type="Node" parent="States" node_paths=PackedStringArray("HeadTilt", "RayCastLeft", "RayCastRight", "defaultState", "slideState", "wallSlideState", "character")]
+[node name="CharacterStateInAir" type="Node" parent="StateManager" node_paths=PackedStringArray("headTilt", "rayCastLeft", "rayCastRight", "character", "manager")]
 script = ExtResource("6_rd644")
-HeadTilt = NodePath("../../HeadTilter")
-RayCastLeft = NodePath("../../WallSlideRayCastLeft")
-RayCastRight = NodePath("../../WallSlideRayCastRight")
-defaultState = NodePath("../CharacterStateDefault")
-slideState = NodePath("../CharacterStateSlide")
-wallSlideState = NodePath("../CharacterStateWallSlide")
+headTilt = NodePath("../../HeadTilter")
+rayCastLeft = NodePath("../../WallSlideRayCastLeft")
+rayCastRight = NodePath("../../WallSlideRayCastRight")
 wallSlideAngleLimit = 20.0
 acceleration = 1800.0
 maxSpeed = 4.0
 friction = 0.0
 character = NodePath("../..")
+manager = NodePath("..")
 
-[node name="CharacterStateSlide" type="Node" parent="States" node_paths=PackedStringArray("Neck", "RayCast", "HeadTilt", "defaultState", "inAirState", "character")]
+[node name="CharacterStateSlide" type="Node" parent="StateManager" node_paths=PackedStringArray("neck", "rayCast", "headTilt", "defaultCapsule", "crouchCapsule", "defaultCharacterArea", "character", "manager")]
 script = ExtResource("7_8cxhk")
-Neck = NodePath("../../Head/CharacterNeck")
-RayCast = NodePath("../../SlideRayCast")
-HeadTilt = NodePath("../../HeadTilter")
-defaultState = NodePath("../CharacterStateDefault")
-inAirState = NodePath("../CharacterStateInAir")
+neck = NodePath("../../Head/CharacterNeck")
+rayCast = NodePath("../../SlideRayCast")
+headTilt = NodePath("../../HeadTilter")
+defaultCapsule = NodePath("../../DefaultCapsule")
+crouchCapsule = NodePath("../../CrouchCapsule")
+defaultCharacterArea = NodePath("../../DefaultCharacterArea")
 slideTurnWeight = 2.5
 slideStopDuration = 0.1
 slideStopSpeed = 2.5
@@ -87,60 +92,65 @@ maxSpeed = 5.0
 maxSpeedEnforcement = 2.0
 friction = 150.0
 character = NodePath("../..")
+manager = NodePath("..")
 
-[node name="CharacterStateSprint" type="Node" parent="States" node_paths=PackedStringArray("Camera", "HeadBob", "HeadTilt", "defaultState", "inAirState", "slideState", "character")]
+[node name="CharacterStateSprint" type="Node" parent="StateManager" node_paths=PackedStringArray("camera", "headBob", "headTilt", "character", "manager")]
 script = ExtResource("8_h88db")
-Camera = NodePath("../../PhysicsInterpolator/Camera3D")
-HeadBob = NodePath("HeadBobSprint")
-HeadTilt = NodePath("../../HeadTilter")
-defaultState = NodePath("../CharacterStateDefault")
-inAirState = NodePath("../CharacterStateInAir")
-slideState = NodePath("../CharacterStateSlide")
+camera = NodePath("../../PhysicsInterpolator/Camera3D")
+headBob = NodePath("../../Head/HeadBob")
+headTilt = NodePath("../../HeadTilter")
 sprintFovMult = 1.15
-sprintMinSpeed = null
 acceleration = 2800.0
 maxSpeed = 3.0
-maxSpeedEnforcement = null
-friction = null
-jumpVelocity = null
 character = NodePath("../..")
+manager = NodePath("..")
 
-[node name="HeadBobSprint" type="Node" parent="States/CharacterStateSprint" node_paths=PackedStringArray("Target")]
-script = ExtResource("4_52b7g")
-Target = NodePath("../../../Head")
-moveX = true
-amplitudeX = 0.05
-frequencyX = 9.0
-offsetX = 4.712
-moveY = true
-amplitudeY = 0.05
-frequencyY = 18.0
-
-[node name="CharacterStateWallSlide" type="Node" parent="States" node_paths=PackedStringArray("HeadTilt", "RayCastLeft", "RayCastRight", "defaultState", "slideState", "inAirState", "character")]
+[node name="CharacterStateWallSlide" type="Node" parent="StateManager" node_paths=PackedStringArray("headTilt", "rayCastLeft", "rayCastRight", "character", "manager")]
 script = ExtResource("9_3gd60")
-HeadTilt = NodePath("HeadTiltWallSlide")
-RayCastLeft = NodePath("../../WallSlideRayCastLeft")
-RayCastRight = NodePath("../../WallSlideRayCastRight")
-defaultState = NodePath("../CharacterStateDefault")
-slideState = NodePath("../CharacterStateSlide")
-inAirState = NodePath("../CharacterStateInAir")
+headTilt = NodePath("HeadTiltWallSlide")
+rayCastLeft = NodePath("../../WallSlideRayCastLeft")
+rayCastRight = NodePath("../../WallSlideRayCastRight")
 acceleration = 2800.0
 maxSpeed = 5.0
 friction = 100.0
 jumpVelocity = 10.0
 character = NodePath("../..")
+manager = NodePath("..")
 
-[node name="HeadTiltWallSlide" type="Node" parent="States/CharacterStateWallSlide" node_paths=PackedStringArray("Target")]
+[node name="HeadTiltWallSlide" type="Node" parent="StateManager/CharacterStateWallSlide" node_paths=PackedStringArray("Target")]
 script = ExtResource("5_iyia5")
 Target = NodePath("../../../Head")
 maxAngle = 5.0
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("Character", "Neck")]
+[node name="CharacterStateCrawl" type="Node" parent="StateManager" node_paths=PackedStringArray("defaultCharacterArea", "defaultCapsule", "crouchCapsule", "neck", "headBob", "character", "manager")]
+script = ExtResource("11_owv1b")
+defaultCharacterArea = NodePath("../../DefaultCharacterArea")
+defaultCapsule = NodePath("../../DefaultCapsule")
+crouchCapsule = NodePath("../../CrouchCapsule")
+neck = NodePath("../../Head/CharacterNeck")
+headBob = NodePath("../../Head/HeadBob")
+acceleration = 1200.0
+maxSpeed = 1.5
+character = NodePath("../..")
+manager = NodePath("..")
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("character", "neck")]
 script = ExtResource("10_bgsp5")
-Character = NodePath("..")
-Neck = NodePath("../Head/CharacterNeck")
+character = NodePath("..")
+neck = NodePath("../Head/CharacterNeck")
 
 [node name="Head" type="Node3D" parent="."]
+
+[node name="HeadBob" type="Node" parent="Head" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_52b7g")
+Target = NodePath("..")
+moveX = true
+amplitudeX = 0.05
+frequencyX = 6.0
+offsetX = 4.712
+moveY = true
+amplitudeY = 0.05
+frequencyY = 12.0
 
 [node name="CharacterNeck" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969877, 0)
@@ -158,10 +168,18 @@ current = true
 fov = 90.0
 script = ExtResource("13_s2a8a")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="PhysicsInterpolator/Camera3D"]
+transform = Transform3D(-1, -7.64274e-15, -8.74228e-08, 0, -1, 8.74228e-08, -8.74228e-08, 8.74228e-08, 1, 0.166, 0, -0.383)
+visible = false
+light_color = Color(1, 0.996078, 0.698039, 1)
+shadow_enabled = true
+spot_range = 13.1957
+spot_angle = 30.1382
+
 [node name="DebugHUD" parent="." instance=ExtResource("14_wid2k")]
 
 [node name="SlideRayCast" type="RayCast3D" parent="."]
-target_position = Vector3(0, -0.05, 0)
+target_position = Vector3(0, -0.3, 0)
 
 [node name="WallSlideRayCastLeft" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
@@ -175,9 +193,9 @@ target_position = Vector3(-0.45, 0, 0)
 script = ExtResource("5_iyia5")
 Target = NodePath("../Head")
 
-[node name="FPSView" parent="." instance=ExtResource("15_di8hs")]
+[node name="DefaultCharacterArea" type="Area3D" parent="."]
+collision_layer = 0
 
-[node name="Sprite2D" parent="FPSView/CanvasLayer" index="0"]
-texture = SubResource("ViewportTexture_cyeio")
-
-[editable path="FPSView"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DefaultCharacterArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CapsuleShape3D_yyvhw")

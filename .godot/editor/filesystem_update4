@@ -1,4 +1,12 @@
-res://Character/FPSView.tscn
-res://Character/PlayerCharacter.tscn
-res://Guns/ShortGun.tscn
-res://Maps/SkyScraper.tscn
+res://Maps/World.tscn
+res://Maps/Dusk.tres
+res://Assets/Tree/TreeLOD1.res
+res://Assets/Tree/TreeLOD2.res
+res://Gardener/toolshed.tres
+res://Gardener/greenhouse.tres
+res://Assets/Texture/TerrainShader.tres
+res://Terrain/World.gdshader
+res://Maps/Night.tres
+res://Environment/RustyTruck.tscn
+res://Terrain/TerrainDataUnder/height.res
+res://Terrain/TerrainDataUnder/data.hterrain

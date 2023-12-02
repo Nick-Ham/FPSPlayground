@@ -2,13 +2,9 @@ extends CharacterState
 class_name CharacterStateWallSlide
 
 @export_category("Built-In")
-@export var HeadTilt : HeadTilter
-@export var RayCastLeft : RayCast3D
-@export var RayCastRight : RayCast3D
-@export_group("States")
-@export var defaultState : CharacterStateDefault
-@export var slideState : CharacterStateSlide
-@export var inAirState : CharacterStateInAir
+@export var headTilt : HeadTilter
+@export var rayCastLeft : RayCast3D
+@export var rayCastRight : RayCast3D
 
 @export_category("WallSlideConfig")
 @export var jumpVelocityWeight : float = 1.0
@@ -19,28 +15,28 @@ var slideSideRayCast : RayCast3D
 func _on_state_enter():
 	super._on_state_enter()
 	
-	if RayCastLeft.is_colliding():
-		slideSideRayCast = RayCastLeft
+	if rayCastLeft.is_colliding():
+		slideSideRayCast = rayCastLeft
 	else:
-		slideSideRayCast = RayCastRight
+		slideSideRayCast = rayCastRight
 
 func updatePhysics(delta : float) -> void:
 	super.updatePhysics(delta)
 	
 	if character.is_on_floor() and character.getInputIsSliding():
-		character.switchState(slideState)
+		manager.switchState(manager.getSlideState())
 		return
 	
 	if character.is_on_floor():
-		character.switchState(defaultState)
+		manager.switchState(manager.getDefaultState())
 		return
 	
-	if !(RayCastLeft.is_colliding() or RayCastRight.is_colliding()) and !character.is_on_floor():
-		character.switchState(inAirState)
+	if !(rayCastLeft.is_colliding() or rayCastRight.is_colliding()) and !character.is_on_floor():
+		manager.switchState(manager.getInAirState())
 		return
 	
-	var tiltDirection = -1.0 if RayCastLeft.is_colliding() else 1.0
-	HeadTilt.update(delta, tiltDirection)
+	var tiltDirection = -1.0 if rayCastLeft.is_colliding() else 1.0
+	headTilt.update(delta, tiltDirection)
 
 func applyGravity(delta : float) -> void:
 	if not character.is_on_floor():
@@ -51,4 +47,4 @@ func justJumped():
 	
 	character.velocity += normal * jumpVelocity
 	
-	character.switchState(inAirState)
+	manager.switchState(manager.getInAirState())

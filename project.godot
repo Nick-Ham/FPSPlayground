@@ -11,13 +11,29 @@ config_version=5
 [application]
 
 config/name="FPSPlayground"
-run/main_scene="res://Maps/SkyScraper.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+run/main_scene="res://Maps/World.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Game="*res://Game.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dreadpon.spatial_gardener/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "blue",
+"res://Character/": "red",
+"res://Components/": "red",
+"res://Environment/": "green",
+"res://Gardener/": "green",
+"res://Maps/": "orange",
+"res://Terrain/": "green"
+}
 
 [filesystem]
 
@@ -104,3 +120,4 @@ CameraDown={
 
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
+3d_physics/layer_3="Terrain"

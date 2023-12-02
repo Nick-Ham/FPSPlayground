@@ -7,7 +7,6 @@ class_name Character
 
 @export_category("Config")
 var coyoteFrames : int = 3
-
 var coyoteTimeCounter : int
 var isCoyoteTime : bool
 
@@ -19,8 +18,6 @@ func _ready():
 
 func _process(delta):
 	currentState.update(delta)
-	
-	Game.printStr(str(currentState.name))
 
 func _physics_process(delta):
 	updateCoyoteTime()
@@ -32,23 +29,42 @@ func bindToController(inController : CharacterController):
 	Util.safeConnect(inController.input_just_jumped, _on_input_just_jumped)
 	Util.safeConnect(inController.input_just_slid, _on_input_just_slid)
 	Util.safeConnect(inController.input_is_sliding, _on_input_is_sliding)
+	Util.safeConnect(inController.input_is_activating, _on_input_is_activating)
+
+func _on_input_is_activating(inIsActivating : bool):
+	currentState.addNewIsActivating(inIsActivating)
+
+func getIsActivationg() -> bool:
+	if !Controller:
+		return false
+	
+	return Controller.getIsActivating()
 
 func _on_input_direction(inDirection : Vector2):
 	currentState.addNewInputDirection(inDirection)
 
 func getInputDirection() -> Vector2:
+	if !Controller:
+		return Vector2()
+	
 	return Controller.getDirection()
 
 func _on_input_sprint(inIsSprinting : bool):
 	currentState.addNewIsSprinting(inIsSprinting)
 
 func getInputIsSprinting() -> bool:
+	if !Controller:
+		return false
+	
 	return Controller.getIsSprinting()
 
 func _on_input_is_sliding(inIsSliding : bool):
 	currentState.addNewIsSliding(inIsSliding)
 
 func getInputIsSliding() -> bool:
+	if !Controller:
+		return false
+	
 	return Controller.getIsSliding()
 
 func _on_input_just_jumped():

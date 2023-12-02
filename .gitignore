@@ -6,3 +6,10 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
+
+# Exclude Addons
+/addons/*
+/reference/*
+
+# Exclude Local-Context Files
+*.mtl
